@@ -1,4 +1,16 @@
-import './style.css'
+import "./style.css";
+
+console.log("Event 1");
+
+setTimeout(() => {
+  console.log("Event 2");
+}, 2000);
+
+setTimeout(() => {
+  console.log("Event 3");
+});
+
+console.log("Event 4");
 
 let taskList = document.querySelector(".view-task__list");
 let inpText = document.querySelector(".add-task-form__inp");
@@ -39,7 +51,7 @@ let deliteIcon = document.querySelector(".delete-btn__icon");
 
 form.addEventListener("submit", addTasks);
 
-function addTasks (event) {
+function addTasks(event) {
   event.preventDefault();
   let valueAddtext = inpText.value;
   if (valueAddtext === "") {
@@ -83,37 +95,27 @@ function addTasks (event) {
   if (taskList.children.length > 1) {
     emptyList.classList.add("hide");
   }
- 
 }
 
 taskList.addEventListener("click", deleteEditTask);
 
-function deleteEditTask (event) {
+function deleteEditTask(event) {
   let editBtn = document.querySelector(".list-item__edit-btn");
-  if(event.target.dataset.action === "delete") {
+  if (event.target.dataset.action === "delete") {
     let parentNode = event.target.closest(".task-list__item");
     parentNode.remove();
   }
-  if(event.target == editBtn) {
+  if (event.target == editBtn) {
     event.target.setAttribute("contenteditable", "true");
-    console.log(true)
+    console.log(true);
   }
-  
 }
-
 
 // document.querySelector(".list-item__text").oninput = function() {
 //   alert(this.innerText);
 // }
 
-
-
-
-
-
-
 // taskList.insertAdjacentHTML('afterend',`)
-
 
 // taskList.addEventListener("click", function (event) {
 //   if (event.classList == listItem || deleteBtn) {
@@ -123,18 +125,6 @@ function deleteEditTask (event) {
 //   }
 //   console.log(event);
 // });
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import javascriptLogo from './javascript.svg'
 // import viteLogo from '/vite.svg'
