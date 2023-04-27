@@ -1,17 +1,5 @@
 import "./style.css";
 
-console.log("Event 1");
-
-setTimeout(() => {
-  console.log("Event 2");
-}, 2000);
-
-setTimeout(() => {
-  console.log("Event 3");
-});
-
-console.log("Event 4");
-
 let taskList = document.querySelector(".view-task__list");
 let inpText = document.querySelector(".add-task-form__inp");
 let emptyList = document.querySelector(".task-list__empty");
@@ -149,3 +137,38 @@ function deleteEditTask(event) {
 // `
 
 // setupCounter(document.querySelector('#counter'))
+
+// ------------------------Start-----------------------
+
+// Store
+
+const tasks = [
+  {
+    id: '123',
+    name: 'Task1',
+    date: Date.now(),
+  },
+  {
+    id: '1234',
+    name: 'Task2',
+    date: Date.now(),
+  },
+  {
+    id: '1235',
+    name: 'Task3',
+    date: Date.now(),
+  }
+];
+
+function renderItem(item) {
+  // template
+  return `<li>${item.name}</li>`;
+}
+
+function renderList() {
+  return tasks.map(renderItem)
+}
+
+function addToDOM() {
+  // adding elements to DOM
+}
