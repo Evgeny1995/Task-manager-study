@@ -133,44 +133,43 @@ function addToArr(el) {
   });
 }
 
-function renderItem(item) {
-  const li = document.createElement('li');
-  li.classList.add('item');
-  
-  const p1 = document.createElement("p")
-  p1.classList.add('text');
+
+function renderItem(item, onDelete) {
+  const li = document.createElement("li");
+  li.classList.add("item");
+
+  const p1 = document.createElement("p");
+  p1.classList.add("text");
   p1.innerText = item.name;
 
-  const p2 = document.createElement("p")
-  p2.classList.add('text');
+  const p2 = document.createElement("p");
+  p2.classList.add("text");
   p2.innerText = item.id;
 
-  const p3 = document.createElement("p")
-  p3.classList.add('text');
+  const p3 = document.createElement("p");
+  p3.classList.add("text");
   p3.innerText = item.date;
-  
-  const btnDel = document.createElement("button")
+
+  const btnDel = document.createElement("button");
   btnDel.classList.add("btn-del");
   btnDel.dataset.type = "button";
   btnDel.innerText = "Удалить";
+  btnDel.onclick = () => onDelete(item.id);
   
   li.appendChild(p1);
   li.appendChild(p2);
   li.appendChild(p3);
   li.appendChild(btnDel);
 
-  // console.log(li);
-  
-  return li;
+  return li ;
 }
 
-function renderList(items) {
-  
-  const ul = document.createElement('ul');
-  ul.classList.add('list');
-  items.map(item => {
-    ul.appendChild(renderItem(item))
-  })
+function renderList(items, onDeleteItem) {
+  const ul = document.createElement("ul");
+  ul.classList.add("list");
+  items.map((item) => {
+    ul.appendChild(renderItem(item, onDeleteItem));
+  });
   return ul;
 }
 
@@ -180,7 +179,12 @@ function addToDOM(target, element) {
 }
 
 function startApp() {
-  const renderedList = renderList(tasks);
+  const onDeleteItem = (id) => {
+    console.log('Delete action');
+    console.log(id)
+  }
+
+  const renderedList = renderList(tasks, onDeleteItem);
 
   $btn.addEventListener("click", () => {
     addToArr($inp);
