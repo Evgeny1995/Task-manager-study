@@ -134,23 +134,49 @@ function addToArr(el) {
 }
 
 function renderItem(item) {
-  return `<li class="item">
-            <p class="name">${item.name}</p>
-            <p class="data-id">${item.id}</p>
-            <p class="date">${item.date}</p>
-            <button class="del-btn" type="button">Удалить</button>
-          </li>`;
+  const li = document.createElement('li');
+  li.classList.add('item');
+  
+  const p1 = document.createElement("p")
+  p1.classList.add('text');
+  p1.innerText = item.name;
+
+  const p2 = document.createElement("p")
+  p2.classList.add('text');
+  p2.innerText = item.id;
+
+  const p3 = document.createElement("p")
+  p3.classList.add('text');
+  p3.innerText = item.date;
+  
+  const btnDel = document.createElement("button")
+  btnDel.classList.add("btn-del");
+  btnDel.dataset.type = "button";
+  btnDel.innerText = "Удалить";
+  
+  li.appendChild(p1);
+  li.appendChild(p2);
+  li.appendChild(p3);
+  li.appendChild(btnDel);
+
+  // console.log(li);
+  
+  return li;
 }
 
 function renderList(items) {
-  return `<ul class="list">
-          ${items.map((item) => renderItem(item)).join("")}
-          </ul>`;
+  
+  const ul = document.createElement('ul');
+  ul.classList.add('list');
+  items.map(item => {
+    ul.appendChild(renderItem(item))
+  })
+  return ul;
 }
 
 function addToDOM(target, element) {
   target.innerHTML = "";
-  target.insertAdjacentHTML("beforeend", element);
+  target.appendChild(element);
 }
 
 function startApp() {
