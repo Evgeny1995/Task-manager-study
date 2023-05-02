@@ -134,7 +134,7 @@ function addToArr(el) {
 }
 
 
-function renderItem(item, onDelete) {
+function renderItem(item, onDelete, onModified) {
   const li = document.createElement("li");
   li.classList.add("item");
 
@@ -155,20 +155,43 @@ function renderItem(item, onDelete) {
   btnDel.dataset.type = "button";
   btnDel.innerText = "Удалить";
   btnDel.onclick = () => onDelete(item.id);
+
+  const inpEdit = document.createElement("input");// выполняет функцию сохранения submit появляется при срабатывании кнопки toogle
+  inpEdit.classList.add("inp-edit");
+  inpEdit.dataset.type = "text";
+
+  const btnEdit = document.createElement("button");// выполняет функцию сохранения submit появляется при срабатывании кнопки toogle
+  btnEdit.classList.add("btn-edit");
+  btnEdit.dataset.type = "button";
+  btnEdit.innerText = "Редактировать";
+  btnEdit.onclick = () => onModified(item.id);
   
+
+  const btnToggle = document.createElement("button");
+  btnToggle.classList.add("btn-toggle");
+  btnToggle.dataset.type = "button";
+  btnToggle.innerText = "Toggle";
+  btnToggle.onclick = () => li.classList.toggle('active');
+
+
+  
+
   li.appendChild(p1);
   li.appendChild(p2);
   li.appendChild(p3);
   li.appendChild(btnDel);
+  li.appendChild(btnToggle);
+  li.appendChild(btnEdit);
+  li.appendChild(inpEdit);
 
   return li ;
 }
 
-function renderList(items, onDeleteItem) {
+function renderList(items, onDeleteItem, onModifiedItem) {
   const ul = document.createElement("ul");
   ul.classList.add("list");
   items.map((item) => {
-    ul.appendChild(renderItem(item, onDeleteItem));
+    ul.appendChild(renderItem(item, onDeleteItem, onModifiedItem));
   });
   return ul;
 }
@@ -179,22 +202,43 @@ function addToDOM(target, element) {
 }
 
 function startApp() {
-  const onDeleteItem = (id) => {
-    console.log('Delete action');
-    console.log(id)
+  const onModifiedItem = (id) => {
+    const index = tasks.findIndex(it => it.id === id);
+
+    if (index !== -1) {
+      tasks[index] = {
+        id: getId(),
+        name: 'modified',
+        date: Date.now(),
+      }
+      render();
+    }
   }
 
-  const renderedList = renderList(tasks, onDeleteItem);
 
-  $btn.addEventListener("click", () => {
+  const onDeleteItem = (id) => {
+    const index = tasks.findIndex(it => it.id === id);
+
+    if (index !== -1) {
+      tasks.splice(index, 1); 
+      render();
+    }
+  }
+
+  const onAddItem = () => {
     addToArr($inp);
+    render();
+  }
 
-    const updatedList = renderList(tasks);
+  $btn.addEventListener("click", onAddItem);
 
-    addToDOM($rowBottom, updatedList);
-  });
+  function render() {
+    const renderedList = renderList(tasks, onDeleteItem, onModifiedItem);
 
-  addToDOM($rowBottom, renderedList);
+    addToDOM($rowBottom, renderedList);
+  }
+
+  render();
 }
 
 startApp();

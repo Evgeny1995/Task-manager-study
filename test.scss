@@ -51,4 +51,17 @@
   align-items: center;
   padding: 0 0 20px 0;
   box-sizing: border-box;
+
+  &.active .btn-edit, &.active .inp-edit {
+    display: block;
+  }
+}
+
+
+.inp-edit, .btn-edit {
+  display: none;
+}
+
+.active {
+  display: block;
 }
