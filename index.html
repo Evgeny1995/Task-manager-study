@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div class="task-manager__wrap">
-      <div class="task-manager__view-task view-task">
-          <ul class="view-task__list task-list">
-              <li class="task-list__empty">
-                  <p class="font-style">
-                      Список задач пуст... 
-                  </p>
-              </li>
-          </ul>
+
+<head>
+  <meta charset="UTF-8" />
+  <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="position">
+      <div class="row-top">
+        <input class="inp" type="text">
+        <button class="btn" type="button">Вывести</button>
       </div>
-      <div class="task-manager__add-task add-task">
-          <form class="add-task__form add-task-form" action="#">
-              <input class="add-task-form__inp" type="text" name="tasks-value" id="task">
-              <button class="add-task-form__btn" type="submit">Добавить задачу</button>
-          </form>
+      <div class="row-bottom">
+        
       </div>
+    </div>
   </div>
-    <script type="module" src="/main.js"></script>
-  </body>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>
