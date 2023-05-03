@@ -164,8 +164,9 @@ function renderItem(item, onDelete, onModified) {
   btnEdit.classList.add("btn-edit");
   btnEdit.dataset.type = "button";
   btnEdit.innerText = "Редактировать";
-  btnEdit.onclick = () => onModified(item.id);
-  
+  btnEdit.onclick = () => p1.innerText = inpEdit.value;
+  console.log(tasks);
+  // onModified(item.id)
 
   const btnToggle = document.createElement("button");
   btnToggle.classList.add("btn-toggle");
@@ -187,11 +188,11 @@ function renderItem(item, onDelete, onModified) {
   return li ;
 }
 
-function renderList(items, onDeleteItem, onModifiedItem) {
+function renderList(items, onDeleteItem, ) {//onModifiedItem
   const ul = document.createElement("ul");
   ul.classList.add("list");
   items.map((item) => {
-    ul.appendChild(renderItem(item, onDeleteItem, onModifiedItem));
+    ul.appendChild(renderItem(item, onDeleteItem, ));//onModifiedItem
   });
   return ul;
 }
@@ -202,18 +203,18 @@ function addToDOM(target, element) {
 }
 
 function startApp() {
-  const onModifiedItem = (id) => {
-    const index = tasks.findIndex(it => it.id === id);
+  // const onModifiedItem = (id) => {
+  //   const index = tasks.findIndex(it => it.id === id);
 
-    if (index !== -1) {
-      tasks[index] = {
-        id: getId(),
-        name: 'modified',
-        date: Date.now(),
-      }
-      render();
-    }
-  }
+  //   if (index !== -1) {
+  //     tasks[index] = {
+  //       id: getId(),
+  //       name: 'modified',
+  //       date: Date.now(),
+  //     }
+  //     render();
+  //   }
+  // }
 
 
   const onDeleteItem = (id) => {
@@ -233,7 +234,7 @@ function startApp() {
   $btn.addEventListener("click", onAddItem);
 
   function render() {
-    const renderedList = renderList(tasks, onDeleteItem, onModifiedItem);
+    const renderedList = renderList(tasks, onDeleteItem, );//onModifiedItem
 
     addToDOM($rowBottom, renderedList);
   }
