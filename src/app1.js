@@ -1,3 +1,4 @@
+import { getId } from "./utils.js";
 
 let $rowBottom = document.querySelector(".row-bottom");
 let $inp = document.querySelector(".inp");
